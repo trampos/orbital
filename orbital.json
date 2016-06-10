@@ -1,25 +1,37 @@
 {
+	"id": "1",
 	"name":"Henrique  Costardi",
-	"children":[
-		{ "name":"tiago  Monteiro","children":
-			[ 
-				{ 
-					"name":"jose@silva.com da Silva"
+	"picture": "http://www.avatarsdb.com/avatars/puppy_heart.jpg",
+	"children":
+	[
+		{
+			"id": "3",
+			"name":"Tiago Monteiro",
+			"picture": "http://www.avatarsdb.com/avatars/anime_girl_wings_flower_blue_dress.jpg",
+			"children":
+			[
+				{
+					"id": "4",
+					"name":"jose@silva.com da Silva",
+					"picture": "http://www.avatarsdb.com/avatars/animal_love.jpg"
 				},
-				{ 
-					"name":"jose@silva.com da Silva"
-				},
-				{ 
-					"name":"Henrique  Costardi",
+				{
+					"id": "5",
+					"name":"Henrica  Costardi",
+					"picture": "http://www.avatarsdb.com/avatars/S_Diary_of_a_Call_Girl.jpg",
 					"children":[
-						{ 
-							"name":"Marcel Yuji Ueno"
+						{
+							"id": "6",
+							"name":"Marcel Yuji Ueno",
+							"picture": "http://www.avatarsdb.com/avatars/Smokyng.gif"
 						}
 					]
 				}
 			]
-		},{ 
-			"name":"tiago  Monteiro"
+		},{
+			"id": "2",
+			"name":"Maria",
+			"picture": "http://www.avatarsdb.com/avatars/Shailene_here_i_am.jpg"
 		}
 	]
 }

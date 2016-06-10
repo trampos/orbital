@@ -11,28 +11,49 @@ function drawOrbital(_data) {
   orbitalScale = d3.scale.linear().domain([1, 3]).range([3.8, 1.5]).clamp(true);
   radiusScale = d3.scale.linear().domain([0,1,2,3]).range([20,10,3,1]).clamp(true);
 
-
   orbital = d3.layout.orbital().size([1000,1000])
-  .children(function(d) {return d.children})
+  // .children(function(d) {return d.children})
   // .revolution(function(d) {return d.depth})
   .orbitalSize(function(d) {return orbitalScale(d.depth)})
   .nodes(_data);
 
-  console.log(orbital.nodes());
-
-  d3.select("svg").selectAll("g.node").data(orbital.nodes())
+  // cria os pontos
+  var svg = d3.select("svg").selectAll("g.node").data(orbital.nodes())
   .enter()
   .append("g")
   .attr("class", "node")
-  .attr("transform", function(d) {return "translate(" +d.x +"," + d.y+")"})
-  .on("mouseover", nodeOver)
+  .attr("transform", function(d, index) {
+    return "translate(" +d.x +"," + d.y+")"
+  }).on("mouseover", nodeOver)
   .on("mouseout", nodeOut)
+
+  // Cria a imagem para pintar o ponto do avatar
+  var defs = svg.append("defs").attr("id", "imgdefs")
+  var avatars = d3.selectAll("g.node")
+  .append("pattern")
+  .attr("id", function(d){
+    return "avatar-" + d.id;
+  })
+  .attr("height", 1)
+  .attr("width", 1)
+  .attr("x", "0")
+  .attr("y", "0")
+
+  d3.selectAll("g.node").select("pattern").append("svg:image")
+  .attr("xlink:href", function(d){ return d.picture })
+  .attr("width", "30")
+  .attr("height", "30")
 
   d3.selectAll("g.node")
   .append("circle")
-  .attr("r", function(d) {return 10 /* radiusScale(d.depth) */})
-  .style("fill", function(d) {return colors(d.depth)})
-  //
+  .attr("r", function(d) { return 15 })
+  .attr("fill", function(d){
+    return "url(#avatar-"+d.id+")";
+  })
+  // .attr("r", function(d) {return 10 /* radiusScale(d.depth) */})
+  // .style("fill", function(d) {return colors(d.depth)})
+
+
   d3.select("svg").selectAll("circle.orbits")
   .data(orbital.orbitalRings())
   .enter()
@@ -66,6 +87,4 @@ function drawOrbital(_data) {
     d3.selectAll("text").remove();
     d3.selectAll("g.node > circle").style("stroke", "none").style("stroke-width", 0);
   }
-
-
 }

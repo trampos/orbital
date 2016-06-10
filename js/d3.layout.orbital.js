@@ -113,7 +113,8 @@ d3.layout.orbital = function() {
 
 		function traverseNestedData(_node) {
 			if(childrenAccessor(_node)) {
-				var thisPie = d3.layout.pie().value(function(d) {return childrenAccessor(d) ? 4 : 1});
+				// var depthNodes = flattenedNodes.select(function(n){ n.depth == depth })
+				var thisPie = d3.layout.pie().value( function(d) { return 1 });
 				var nodeChildren = childrenAccessor(_node);
 				var piedValues = thisPie(nodeChildren);
 				var depth = _node.depth + 1;
@@ -121,6 +122,7 @@ d3.layout.orbital = function() {
 				for (var x = 0; x < nodeChildren.length; x++) {
 					nodeChildren[x].angle = ((piedValues[x].endAngle - piedValues[x].startAngle) / 2) + piedValues[x].startAngle;
 					nodeChildren[x].depth = depth;
+					nodeChildren[x].parent = _node;
 
 					nodeChildren[x].x = rootNode.x + ( (100 + (depth * 50)) * Math.sin( nodeChildren[x].angle ) );
 					nodeChildren[x].y = rootNode.y + ( (100 + (depth * 50)) * Math.cos( nodeChildren[x].angle ) );
