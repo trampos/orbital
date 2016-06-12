@@ -1,17 +1,33 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-	<script src="js/d3.layout.orbital.js" charset="utf-8"></script>
-	<script src="js/scripts.js" charset="utf-8"></script>
-	<style>
-	  #viz, svg {
-	    width: 1000px;
-	    height: 1000px;
-	  }
-	</style>
-</head>
-<body onload="makeViz()">
-	<h1>Hello World</h1>
-	<div id="viz"><svg></svg></div>
-</body>
-</html>
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: auto;
+  position: relative;
+  width: 960px;
+}
+
+form {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+path {
+  stroke: #fff;
+  fill-rule: evenodd;
+}
+
+circle.orbit { stroke:rgba(0,0,0,0.2); }
+circle.root { r: 40 }
+circle.child { r: 10 }
+
+line.highlight { stroke:#F00; }
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="js/scripts.js"></script>
