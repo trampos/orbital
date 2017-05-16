@@ -1,0 +1,82 @@
+
+.link {
+  fill: none;
+  stroke: #fff;
+  stroke-opacity: 0;
+  stroke-width: 0.2%;
+  -webkit-transition: stroke-opacity 2s; /* Safari */
+  transition: stroke-opacity 2s;
+}
+
+.link.highlight {
+  stroke-opacity: 1;
+}
+
+.orbit {
+  fill: none;
+  stroke: #fff;
+  stroke-opacity: 0.5;
+  stroke-width: 1.5px;
+  stroke-dasharray: 4,2;
+  stroke-width: 1;
+  -webkit-transition: stroke-width, stroke-opacity 2s; /* Safari */
+  transition: stroke-width, stroke-opacity 2s;
+}
+
+.orbit.highlight {
+  stroke-opacity: 1;
+  stroke-dasharray: none;
+  stroke-width: 2;
+}
+
+.orbitman {
+  cursor:pointer;
+  fill: blue;
+  stroke-opacity:0.5;
+  stroke: #fff;
+  -webkit-transition: fill .4s; /* Safari */
+  transition: fill .4s;
+}
+
+.orbitman.highlight {
+  fill: yellow;
+  stroke-width:0.4%;
+  stroke-opacity:1;
+  stroke: #fff;
+}
+
+.orbitman.highlight.edge {
+  fill: orange;
+}
+
+.orbit-way {
+  padding-left:25px;
+  white-space:nowrap;
+}
+.orbit-way-item {
+  width:40px;
+  height:40px;
+  background-color:orange;
+  border-radius:50%;
+  overflow:hidden;
+  display:inline-block;
+  margin-left:-25px;
+  border:1px solid #fff;
+}
+
+#orbital-container { position:relative; display:inline-block; }
+#orbital-container svg { position:relative; z-index:2; }
+#orbital-container:before, #orbital-container:after {
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+#orbital-container:before {
+  background-image:url("../imagens/orbital-pattern.png");
+}
+#orbital-container:after {
+  background-image:url("../imagens/orbital-overlay.png");
+}
