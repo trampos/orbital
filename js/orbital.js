@@ -6,13 +6,6 @@ var svg = d3.select("svg"),
     height = +svg.attr("height") - 40,
     defs = svg.append('defs');
 
-/* BACKGROUND */
-svg.append("g").append("rect")
-  .attr("class","background-image")
-  .attr('width', 300)
-  .attr('height', 300)
-  .attr("fill", "url(#orbital-background)");
-
 var g = svg.append("g").attr("transform", "translate(" + (width / 2 + 20) + "," + (height / 2 + 20) + ")"),
     radius = Math.min(width, height) / 2,
     orbitSize = radius / 11;
@@ -155,13 +148,6 @@ d3.json("orbital.json", function(error, data) {
     .attr("fill", function(d){ return d.depth == 0 ? "url(#root-orbitman-background)" : null });
 
 });
-
-/* BACKGROUND */
-svg.append("g").append("rect")
-  .attr("class","overlay-image")
-  .attr('width', svg.attr("width"))
-  .attr('height', svg.attr("width"))
-  .attr("fill", "url(#orbital-overlay)");
 
 var orbitNumber = function(d){
   var count = 0, node = d;

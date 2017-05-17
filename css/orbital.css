@@ -31,7 +31,7 @@
 
 .orbitman {
   cursor:pointer;
-  fill: blue;
+  fill: #1c3343;
   stroke-opacity:0.5;
   stroke: #fff;
   -webkit-transition: fill .4s; /* Safari */
@@ -39,20 +39,21 @@
 }
 
 .orbitman.highlight {
-  fill: yellow;
+  fill: #f9bd84;
   stroke-width:0.4%;
   stroke-opacity:1;
   stroke: #fff;
 }
 
 .orbitman.highlight.edge {
-  fill: orange;
+  fill: #eb5d1b;
 }
 
 .orbit-way {
   padding-left:25px;
   white-space:nowrap;
 }
+
 .orbit-way-item {
   width:40px;
   height:40px;
