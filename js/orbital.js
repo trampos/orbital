@@ -48,6 +48,19 @@ jQuery.fn.orbital = function(jsonUrl){
 
     /* FIM DESENHA ORBITAIS */
 
+    var getDepth = function (obj) {
+      var depth = 0;
+      if (obj.children) {
+          obj.children.forEach(function (d) {
+              var tmpDepth = getDepth(d)
+              if (tmpDepth > depth) {
+                  depth = tmpDepth
+              }
+          })
+      }
+      return 1 + depth
+    };
+
     var guid = function() {
       function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
@@ -71,11 +84,12 @@ jQuery.fn.orbital = function(jsonUrl){
       return data;
     }
 
-    var tree = d3.tree()
-        .size([360, orbitSize*7])
-        .separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
-
     d3.json(jsonUrl, function(error, data) {
+
+      var tree = d3.tree()
+         .size([360, orbitSize * getDepth(data)])
+         .separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
+
       var root = tree(orbitalData(d3.hierarchy(data)));
 
       var buildTooltipster = function(d){
@@ -144,7 +158,7 @@ jQuery.fn.orbital = function(jsonUrl){
         .attr("class", function(d,i){ return "node"; })
         .attr("transform", function(d) {
           var a = (d.x - 90) / 180 * Math.PI, r = d.y;
-          return "translate(" + r * Math.cos(a) + "," + r * Math.sin(a) + ")";
+          return "translate(" + (r * Math.cos(a)) + "," + (r * Math.sin(a)) + ")";
         })
         .each(buildTooltipster)
         .on('mouseover', highlightOn)
