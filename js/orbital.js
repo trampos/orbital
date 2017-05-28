@@ -5,11 +5,12 @@ jQuery.fn.orbital = function(jsonUrl){
     var svg = d3.select($(this).get(0)),
         width = +svg.attr("width") - 40,
         height = +svg.attr("height") - 40,
-        defs = svg.append('defs');
+        defs = svg.append('defs'),
+        totalOrbits = 9;
 
     var g = svg.append("g").attr("transform", "translate(" + (width / 2 + 20) + "," + (height / 2 + 20) + ")"),
         radius = Math.min(width, height) / 2,
-        orbitSize = radius / 11;
+        orbitSize = radius / (totalOrbits + 2);
 
     var orbitNumber = function(d){
       var count = 0, node = d;
@@ -33,13 +34,17 @@ jQuery.fn.orbital = function(jsonUrl){
     /* DESENHA ORBITAIS */
 
     var y = d3.scaleLinear()
-        .range([orbitSize, radius]);
+        .range([orbitSize * 2, radius])
+        .domain([0, totalOrbits]);
 
     var yAxis = g.append("g");
 
+    var ticks = new Array(totalOrbits);
+    ticks = ticks.fill().map(function(v,i,a){ return i % totalOrbits; });
+
     var yTick = yAxis
       .selectAll("g")
-      .data(y.ticks(10).slice(1))
+      .data(ticks)
       .enter().append("g");
 
     yTick.append("circle")
@@ -94,7 +99,6 @@ jQuery.fn.orbital = function(jsonUrl){
 
       var buildTooltipster = function(d){
         if(d.depth > 0){
-          // console.log(this, d)
           var content = "<h4>" + orbitNumber(d) + "a orbita</h4>";
           content += "<div class=\"orbit-way\">"
           content += "<div class=\"orbit-way-item\"><img src=\"" + root.data.picture + "\" /></div>";
@@ -153,7 +157,7 @@ jQuery.fn.orbital = function(jsonUrl){
         .attr("y2", function(d) { return d.target.y * Math.sin((d.target.x - 90) / 180 * Math.PI); });
 
       var node = g.selectAll(".node")
-        .data(root.descendants())
+        .data(root.descendants().filter( function(d) { return d.depth <= totalOrbits + 1; } ))
         .enter().append("g")
         .attr("class", function(d,i){ return "node"; })
         .attr("transform", function(d) {

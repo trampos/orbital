@@ -3,7 +3,7 @@
   fill: none;
   stroke: #fff;
   stroke-opacity: 0;
-  stroke-width: 0.2%;
+  stroke-width: 0.3%;
   -webkit-transition: stroke-opacity 2s; /* Safari */
   transition: stroke-opacity 2s;
 }
