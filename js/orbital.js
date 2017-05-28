@@ -99,17 +99,9 @@ jQuery.fn.orbital = function(jsonUrl){
 
       var buildTooltipster = function(d){
         if(d.depth > 0){
-          var content = "<h4>" + orbitNumber(d) + "a orbita</h4>";
-          content += "<div class=\"orbit-way\">"
-          content += "<div class=\"orbit-way-item\"><img src=\"" + root.data.picture + "\" /></div>";
-          for(var i = 2; i < d.depth; i++){
-            content += "<div class=\"orbit-way-item\"></div>";
-          }
-          content += "<div class=\"orbit-way-item\"><img src=\"" + d.data.picture + "\" /></div>";
-          content += "</div>";
-          content += "<p>Parentesco de " + d.data.name + "</p>";
-
-          $(this).tooltipster({ theme: 'tooltipster-shadow', contentAsHTML: true, content: content, delay: 0 });
+            var content = "<h4>" + orbitNumber(d) + "a orbita</h4>";
+            content += "<p>Parentesco de " + d.data.name + "</p>";
+            jQuery(this).tooltipster({ theme: 'tooltipster-shadow', contentAsHTML: true, content: content, delay: 0 });
         }
       };
 
